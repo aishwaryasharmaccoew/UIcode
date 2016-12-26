@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Bread and Bucks</title>
+	<link rel="icon" type="image/png" href="Images/apple.png">
+	<link rel="stylesheet" type="text/css" href="mainpage.css">
+</head>
+<body>
+	<main>
+		<header>
+			<h1>BREAD AND BUCKS</h1>
+		</header>
+		
+		<section>
+			<div id="nav-wrapper">
+				<ul id="nav">
+					<li><a href="">Home</a></li>
+					<li><a href="">SIGN IN</a></li>
+					<li><a href="">ABOUT</a></li>
+					<li><a href="">REVIEWS</a></li>
+				</ul>
+			</div>
+			
+		
+			<div class "sector"
+						ng-init="
+							sects=[
+							{
+								name:'Information Technology',
+								image:'Images/IT.jpg',
+								code:'1'
+							},
+							{
+								name:'Cigarettes',
+								image:'Images/IT.jpg',
+								code:'2'
+							},
+							{
+								name:'Pharmaceuticals',
+								image:'Images/IT.jpg',
+								code:'3'
+							},
+							{
+								name:'Cements',
+								image:'Images/IT.jpg',
+								code:'4'
+							},
+							{
+								name:'Automobile',
+								image:'Images/IT.jpg',
+								code:'5'
+							},
+							{
+								name:'Financial Services',
+								image:'Images/IT.jpg',
+								code:'6'
+							},
+							{
+								name:'Metals',
+								image:'Images/IT.jpg',
+								code:'7'
+							},
+							{
+								name:'Energy',
+								image:'Images/IT.jpg',
+								code:'8'
+							},
+							{
+								name:'Telecom',
+								image:'Images/IT.jpg',
+								code:'9'
+							},
+							{
+								name:'Consumer Goods',
+								image:'Images/IT.jpg',
+								code:'10'
+							},
+							{
+								name:'Construction',
+								image:'Images/IT.jpg',
+								code:'11'
+							},
+							{
+								name:'Industrial Manufacturing',
+								image:'Images/IT.jpg',
+								code:'12'
+							},
+							{
+								name:'Media & Entertainment',
+								image:'Images/IT.jpg',
+								code:'13'
+							},
+							{
+								name:'Shipping',
+								image:'Images/IT.jpg',
+								code:'14'
+							}
+						]">
+						
+						
+			
+				
+			
+				<div class="relative" ng-repeat="x in sects" ng-controller="MyCtrl">
+					<img class="image" src="{{x.image}}" alt="alternate text" ng-click="submit(x.name)">
+					<p class="absolute-text">{{x.name}}</p>
+				</div>
+
+				
+			</div>
+		</section>
+						
+	</main>
+	<footer>
+		<p>
+			*DISCLAIMER:
+		</p>
+	
+	</footer>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
+	</script>
+	<script type="text/javascript">
+	var app = angular.module('Submit', []);
+	
+	app.controller('MyCtrl',[ '$scope', '$http', function($scope,$http) {
+			
+			$scope.list = [];
+			$scope.headerText = 'Pass Below JSON object using AngularJS Spring MVC Controller';
+			
+			$scope.submit = function(UIname) {
+				$scope.name =  UIname;
+
+				var response = $http.post('PostFormDataJSONArray', $scope.name);
+				response.success(function(data, status, headers, config) {
+					$scope.list.push(data);
+				});
+				response.error(function(data, status, headers, config) {
+					alert( "Exception details: " + JSON.stringify({data: data}));
+				});
+				
+		//Empty list data after process
+
+				$scope.list = [];
+				
+			};
+		}]);
+</script>
+	
+</body>
+</html>
